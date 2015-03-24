@@ -119,10 +119,11 @@ fi
 # use an array to record name and ip
 declare -A mm
 ii=1
-# we use static etcd configuration 
-# see https://github.com/coreos/etcd/blob/master/Documentation/clustering.md#static
-echo "Please enter all your cluster node ips, MASTER node comes first"
-read -p "And separated with blank space like \"<ip_1> <ip_2> <ip_3>\": " etcdIPs
+etcdIPs=$2
+myIP=$3
+option=$4
+
+
 
 for i in $etcdIPs
 do
@@ -147,17 +148,10 @@ echo
 
 # input node IPs
 while true; do
-    echo "This machine acts as"
-    echo -e "  both MASTER and MINION:      \033[1m1\033[0m"
-    echo -e "  only MASTER:                 \033[1m2\033[0m"
-    echo -e "  only MINION:                 \033[1m3\033[0m"
-	read -p "Please choose a role > " option 
-    echo
 
 	case $option in
 	    [1] )
             # as both master and minion
-        	read -p "IP address of this machine > " myIP
             echo
             etcdName=${mm[$myIP]}
             inList $etcdName $myIP
@@ -177,7 +171,6 @@ while true; do
 	        ;;
         [2] )
             # as master
-        	read -p "IP address of this machine > " myIP
             echo
             etcdName=${mm[$myIP]}
             inList $etcdName $myIP
@@ -189,7 +182,6 @@ while true; do
             ;;
         [3] )
             # as minion
-        	read -p "IP address of this machine > " myIP
             echo
             etcdName=${mm[$myIP]}
             inList $etcdName $myIP
