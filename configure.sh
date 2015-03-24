@@ -119,9 +119,9 @@ fi
 # use an array to record name and ip
 declare -A mm
 ii=1
-etcdIPs=$2
-myIP=$3
-option=$4
+etcdIPs=$1
+myIP=$2
+option=$3
 
 
 
