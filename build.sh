@@ -78,4 +78,8 @@ popd
 cp kubernetes/server/kubernetes/server/bin/* binaries/
 
 rm -rf flannel kubernetes* etcd*
+
+mkdir /opt/bin
+cp binaries/* /opt/bin/
+
 echo "Done! All your commands locate in ./binaries dir"
